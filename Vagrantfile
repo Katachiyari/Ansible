@@ -17,8 +17,7 @@ Vagrant.configure("2") do |config|
       vb.customize ["modifyhd", :id, "--resize", 20480]
     end
     cn.vm.network "private_network", ip: "172.25.0.111"
-    cn.vm.provision "shell", shell: "chmod +x /vagrant/ControllerNode/cn.sh"
-    cn.vm.provision "shell", path: "./ControllerNode/cn.sh"
+    cn.vm.provision "shell", inline: "chmod +x /vagrant/ControllerNode/cn.sh"
   end
 
   # mn / manager node / vm2
@@ -31,7 +30,6 @@ Vagrant.configure("2") do |config|
       vb.customize ["modifyhd", :id, "--resize", 20480] 
     end
     mn.vm.network "private_network", ip: "172.25.0.112"
-    mn.vm.provision "shell", shell: "chmod +x /vagrant/ManagerNode/mn.sh'"
-    mn.vm.provision "shell", path: "./ManagerNode/mn.sh"
+    mn.vm.provision "shell", inline: "chmod +x /vagrant/ManagerNode/mn.sh"
   end
 end
