@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
-  config.vbguest.auto_update = true
+  #config.vbguest.auto_update = true
   # vagrant plugin install vagrant-disksize
-  config.disksize.size = '20GB'
+  #config.disksize.size = '20GB'
   #commentaire en francais
   if Vagrant.has_plugin?("vagrant-proxyconf") # Configuration du proxy 
     config.proxy.http = "http://192.168.56.200:3142/"
