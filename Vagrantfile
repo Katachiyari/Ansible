@@ -1,5 +1,5 @@
 Vagrant.configure("2") do |config|
-  #config.vbguest.auto_update = true
+  config.vbguest.auto_update = false # Désactive la mise à jour automatique des Additions invité VirtualBox
   # vagrant plugin install vagrant-disksize
   #config.disksize.size = '20GB'
   #commentaire en francais
