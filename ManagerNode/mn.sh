@@ -1,5 +1,11 @@
 #!/bin/bash
 #mn / manger node setup / vm2
+export http_proxy="http://192.168.56.200:3142/"
+export https_proxy="http://192.168.56.200:3142/"
+export no_proxy="localhost,127.0.0.1,.devops-afpa.fr"
+source /etc/profile.d/proxy.sh
+
+apt update && apt upgrade -y # Met à jour la liste des paquets et installe les mises à jour disponibles
 adduser mn_user --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password # Crée un nouvel utilisateur sans mot de passe
 echo "mn_user:mn_p@ssword" | chpasswd # Définit le mot de passe pour l'utilisateur mn_user
 usermod -aG sudo mn_user # Ajoute l'utilisateur mn_user au groupe sudo pour les privilèges administratifs
