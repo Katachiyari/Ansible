@@ -1,21 +1,28 @@
 #!/bin/bash
 #mn / manger node setup / vm2
-export http_proxy="http://192.168.56.200:3142/"
-export https_proxy="http://192.168.56.200:3142/"
-export no_proxy="localhost,127.0.0.1,.devops-afpa.fr"
-source /etc/profile.d/proxy.sh
-
+set -e
 apt update && apt upgrade -y # Met à jour la liste des paquets et installe les mises à jour disponibles
-adduser mn_user --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password # Crée un nouvel utilisateur sans mot de passe
-echo "mn_user:mn_p@ssword" | chpasswd # Définit le mot de passe pour l'utilisateur mn_user
-usermod -aG sudo mn_user # Ajoute l'utilisateur mn_user au groupe sudo pour les privilèges administratifs
+# Crée un utilisateur avec la possibilité de connexion par mot de passe
+adduser mn_user --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+# Débloquer le mot de passe (pour permettre connexion)
+passwd -d mn_user
 
-# Configuration de l'accès SSH pour mn_user
+# Définir le mot de passe
+echo "mn_user:mn_p@ssword" | chpasswd
+
+# Ajouter l'utilisateur au groupe sudo
+usermod -aG sudo mn_user
+
+# Assurer que le shell est valide (bash)
+usermod -s /bin/bash mn_user
+
+# Création dossier SSH et réglage permissions
 mkdir -p /home/mn_user/.ssh
 chown mn_user:mn_user /home/mn_user/.ssh
 chmod 700 /home/mn_user/.ssh
 
-ssh-keygen -t RSA -b 4096 -C "mn_user@localhost" -f /home/mn_user/.ssh/id_mn -N ""
+
+sudo -u mn_user ssh-keygen -t rsa -b 4096 -C "mn_user@localhost" -f /home/mn_user/.ssh/id_mn -N ""
 
 # Soit copier localement pour éviter doublons
 cp /home/mn_user/.ssh/id_mn.pub /home/mn_user/.ssh/authorized_keys

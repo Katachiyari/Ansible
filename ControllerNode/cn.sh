@@ -1,5 +1,6 @@
 #!/bin/bash
 #cn / controller node setup / vm1
+set -e
 export http_proxy="http://192.168.56.200:3142/"
 export https_proxy="http://192.168.56.200:3142/"
 export no_proxy="localhost,127.0.0.1,.devops-afpa.fr"
@@ -15,7 +16,7 @@ mkdir -p /home/cn_user/.ssh
 chown cn_user:cn_user /home/cn_user/.ssh
 chmod 700 /home/cn_user/.ssh
 
-ssh-keygen -t RSA -b 4096 -C "cn_user@localhost" -f /home/cn_user/.ssh/id_cn -N ""
+sudo -u cn_user ssh-keygen -t rsa -b 4096 -C "cn_user@localhost" -f /home/cn_user/.ssh/id_cn -N ""
 
 # Soit copier localement pour éviter doublons
 cp /home/cn_user/.ssh/id_cn.pub /home/cn_user/.ssh/authorized_keys
