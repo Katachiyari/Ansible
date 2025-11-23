@@ -1,6 +1,5 @@
 #!/bin/bash
-#cn / controller node setup / vm2
-apt update && apt upgrade -y # Met à jour la liste des paquets et installe les mises à jour disponibles
+#mn / manger node setup / vm2
 adduser mn_user --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password # Crée un nouvel utilisateur sans mot de passe
 echo "mn_user:mn_p@ssword" | chpasswd # Définit le mot de passe pour l'utilisateur mn_user
 usermod -aG sudo mn_user # Ajoute l'utilisateur mn_user au groupe sudo pour les privilèges administratifs
