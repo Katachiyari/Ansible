@@ -4,8 +4,8 @@ Vagrant.configure("2") do |config|
   config.disksize.size = '20GB'
   #commentaire en francais
   if Vagrant.has_plugin?("vagrant-proxyconf") # Configuration du proxy 
-    config.proxy.http = "http://172.25.0.200:3142/"
-    config.proxy.https = "http://172.25.0.200:3142/"
+    config.proxy.http = "http://192.168.56.200:3142/"
+    config.proxy.https = "http://192.168.56.200:3142/"
     config.proxy.no_proxy = "localhost,127.0.0.1,.devops-afpa.fr"
   end
 
