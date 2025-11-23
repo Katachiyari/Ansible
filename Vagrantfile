@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
     config.proxy.no_proxy = "localhost,127.0.0.1,.devops-afpa.fr"
   end
 
-  # cn / controller node / vm1
+  # cn / controller node / vm111
   config.vm.define "cn" do |cn| # Configuration de la première machine virtuelle
     cn.vm.box = "ubuntu/bionic64"
     cn.vm.box_version = "20230607.0.5"
@@ -16,11 +16,11 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
       vb.customize ["modifyhd", :id, "--resize", 20480]
     end
-    cn.vm.network "private_network", ip: "172.25.0.111"
+    cn.vm.network "private_network", ip: "192.168.56.111"
     cn.vm.provision "shell", inline: "chmod +x /vagrant/ControllerNode/cn.sh"
   end
 
-  # mn / manager node / vm2
+  # mn / manager node / vm112
   config.vm.define "mn" do |mn| # Configuration de la deuxième machine virtuelle
     mn.vm.box = "ubuntu/bionic64"
     mn.vm.box_version = "20230607.0.5"
@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
       vb.customize ["modifyhd", :id, "--resize", 20480] 
     end
-    mn.vm.network "private_network", ip: "172.25.0.112"
+    mn.vm.network "private_network", ip: "192.168.56.112"
     mn.vm.provision "shell", inline: "chmod +x /vagrant/ManagerNode/mn.sh"
   end
 end

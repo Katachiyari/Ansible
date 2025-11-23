@@ -10,7 +10,7 @@ mkdir -p /home/mn_user/.ssh
 chown mn_user:mn_user /home/mn_user/.ssh
 chmod 700 /home/mn_user/.ssh
 
-ssh-keygen -t RSA -b 4096 -C "mn_user@172.25.0.112" -f /home/mn_user/.ssh/id_mn -N ""
+ssh-keygen -t RSA -b 4096 -C "mn_user@localhost" -f /home/mn_user/.ssh/id_mn -N ""
 
 # Soit copier localement pour éviter doublons
 cp /home/mn_user/.ssh/id_mn.pub /home/mn_user/.ssh/authorized_keys
@@ -24,7 +24,7 @@ grep -qxF 'PasswordAuthentication no' /etc/ssh/sshd_config || echo 'PasswordAuth
 systemctl restart sshd
 
 # copier la clé vers le nœud de gestion (doit être accessible)
-ssh-copy-id -i /home/mn_user/.ssh/id_mn.pub cn_user@172.25.0.111
+ssh-copy-id -i /home/mn_user/.ssh/id_mn.pub cn_user@192.168.56.111
 
 # verification python3 installation
 if ! command -v python3 &> /dev/null
