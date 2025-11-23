@@ -1,6 +1,7 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "gutehall/ubuntu25-04"
-  config.vm.box_version = "2024.11.20"
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.box_version = "20230607.0.5"
+end
 
   #vm1
   config.vm.provider "virtualbox" do |vb|
