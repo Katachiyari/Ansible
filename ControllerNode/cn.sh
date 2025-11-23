@@ -1,6 +1,5 @@
 #!/bin/bash
 #cn / controller node setup / vm1
-apt update && apt upgrade -y # Met à jour la liste des paquets et installe les mises à jour disponibles
 adduser cn_user --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password # Crée un nouvel utilisateur sans mot de passe
 echo "cn_user:cn_p@ssword" | chpasswd # Définit le mot de passe pour l'utilisateur cn_user
 usermod -aG sudo cn_user # Ajoute l'utilisateur cn_user au groupe sudo pour les privilèges administratifs
