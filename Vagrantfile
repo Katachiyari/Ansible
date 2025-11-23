@@ -1,5 +1,7 @@
 Vagrant.configure("2") do |config|
   config.vbguest.auto_update = true
+  # vagrant plugin install vagrant-disksize
+  config.disksize.size = '20GB'
   #commentaire en francais
   if Vagrant.has_plugin?("vagrant-proxyconf") # Configuration du proxy 
     config.proxy.http = "http://172.25.0.200:3142/"
@@ -14,10 +16,8 @@ Vagrant.configure("2") do |config|
     cn.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
       vb.cpus = 2
-      vb.customize ["modifyhd", :id, "--resize", 20480]
     end
     cn.vm.network "private_network", ip: "192.168.56.111"
-    cn.vm.provision "shell", inline: "chmod +x /vagrant/ControllerNode/cn.sh"
   end
 
   # mn / manager node / vm112
@@ -26,8 +26,7 @@ Vagrant.configure("2") do |config|
     mn.vm.box_version = "20230607.0.5"
     mn.vm.provider "virtualbox" do |vb|
       vb.memory = "2048"
-      vb.cpus = 2
-      vb.customize ["modifyhd", :id, "--resize", 20480] 
+      vb.cpus = 2 
     end
     mn.vm.network "private_network", ip: "192.168.56.112"
     mn.vm.provision "shell", inline: "chmod +x /vagrant/ManagerNode/mn.sh"
